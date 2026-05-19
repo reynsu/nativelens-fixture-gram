@@ -1,2 +1,4 @@
 allowBuilds:
+  detox: true
+  dtrace-provider: true
   unrs-resolver: true

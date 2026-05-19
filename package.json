@@ -40,12 +40,15 @@
     "zustand": "^5.0.13"
   },
   "devDependencies": {
+    "@reynsu/nativelens-detox-adapter": "^0.2.0",
+    "@reynsu/nativelens-probe-bundle": "^0.2.0",
+    "@types/jest": "^30.0.0",
     "@types/react": "~19.1.0",
+    "detox": "^20.50.4",
     "eslint": "^9.25.0",
     "eslint-config-expo": "~10.0.0",
-    "typescript": "~5.9.2",
-    "@reynsu/nativelens-probe-bundle": "^0.2.0",
-    "@reynsu/nativelens-detox-adapter": "^0.2.0"
+    "jest": "^30.4.2",
+    "typescript": "~5.9.2"
   },
   "private": true
 }
