@@ -15,7 +15,7 @@ The mapping `(bugId → category, file, expected diagnosis)` for every planted b
 The in-process `src/lib/fakeApi.ts` module that simulates remote latency via `Promise + setTimeout`. The only "backend" Pixly has. Bugs that rely on async timing (state-desync, navigation-race) need this to fire.
 
 **hydration phase**:
-The interval between app boot and the moment `useSession.hydrate()` resolves the persisted session from AsyncStorage. The root layout reads `isLoggedIn` synchronously, so what the user sees during the hydration phase depends on whether the layout waits for `isHydrated`. The current implementation is a deliberate plant; do not "fix" it without updating the answer-key.
+The interval between app boot and the moment `useSession.hydrate()` resolves the persisted session from AsyncStorage. The root layout's auth-routing `useEffect` reads `isLoggedIn` while hydration is still pending, so what the user sees during the hydration phase depends on whether the effect waits for `isHydrated`. The current implementation is a deliberate plant; do not "fix" it without updating the answer-key.
 
 **current user**:
 The session-owning user in the running app. Pinned to `CURRENT_USER_ID` in `src/data/users.ts`. The login form's typed handle is cosmetic — auth succeeds when the password is ≥ 4 chars and the resulting session is always `CURRENT_USER_ID`.

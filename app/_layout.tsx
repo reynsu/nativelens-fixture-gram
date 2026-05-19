@@ -1,18 +1,24 @@
 import { useEffect } from "react";
-import { Redirect, Stack } from "expo-router";
+import { router, Stack, useSegments } from "expo-router";
 import { useSession } from "../src/stores/session";
 
 export default function RootLayout() {
   const isLoggedIn = useSession((s) => s.isLoggedIn);
   const hydrate = useSession((s) => s.hydrate);
+  const segments = useSegments();
 
   useEffect(() => {
     hydrate();
   }, [hydrate]);
 
-  if (!isLoggedIn) {
-    return <Redirect href="/auth/login" />;
-  }
+  useEffect(() => {
+    const inAuthGroup = segments[0] === "auth";
+    if (!isLoggedIn && !inAuthGroup) {
+      router.replace("/auth/login");
+    } else if (isLoggedIn && inAuthGroup) {
+      router.replace("/(tabs)/feed");
+    }
+  }, [isLoggedIn, segments]);
 
   return (
     <Stack
